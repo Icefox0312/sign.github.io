@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Sense AI</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- MediaPipe Tasks Vision -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js" crossorigin="anonymous"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <h1>Sign Sense AI</h1>
+      <p>Real-time Hand Tracking & Custom Sign Builder (Learn 50+ Signs!)</p>
+    </header>
+
+    <main class="main-content">
+      <div class="left-column">
+        <div class="video-container">
+          <div id="loadingOverlay" class="loading-overlay">
+            <div class="spinner"></div>
+            <p id="loadingText">Initializing camera & AI models...</p>
+          </div>
+          <video id="videoFeed" class="video-feed" autoplay playsinline muted></video>
+          <canvas id="canvasOverlay" class="canvas-overlay"></canvas>
+        </div>
+
+        <div class="glass-card custom-sign-panel">
+          <h3>Record Custom Sign</h3>
+          <p class="subtitle">Hold your hand to the camera, name your sign, and click Save!</p>
+          <div class="capture-controls">
+            <input type="text" id="signNameInput" placeholder="e.g., Gang Sign, Secret Handshake..." />
+            <button id="captureBtn" class="btn-primary">Save Sign</button>
+          </div>
+          <div class="saved-signs-container">
+            <h4>Your Library (<span id="savedCount">0</span>)</h4>
+            <div id="savedSignsList" class="saved-signs-list">
+              <!-- Custom signs will be injected here -->
+            </div>
+            <button id="clearAllBtn" class="btn-danger" style="display: none;">Clear All</button>
+          </div>
+        </div>
+      </div>
+      
+      <aside class="side-panel">
+        <div class="glass-card">
+          <div class="gesture-result">
+            <div id="iconWrapper" class="gesture-icon-wrapper">
+              <i data-lucide="x-circle" style="color: #94a3b8; width: 48px; height: 48px;"></i>
+            </div>
+            <h2 id="gestureName" class="gesture-name">Waiting...</h2>
+            
+            <div id="confidenceDetails" style="display: none; width: 100%;">
+              <p class="confidence-text">Confidence: <span id="confidenceScore">0</span>%</p>
+              <div class="confidence-bar-container">
+                <div id="confidenceBar" class="confidence-bar" style="width: 0%;"></div>
+              </div>
+              <p class="confidence-text" style="margin-top: 1rem; font-weight: 600;">
+                <span id="handednessText">-</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="glass-card" style="flex: 1; display: flex; flex-direction: column; overflow-y: auto;">
+          <h3 style="margin-bottom: 1rem; color: #94a3b8;">Built-in Signs</h3>
+          <ul style="list-style: none; display: grid; grid-template-columns: 1fr; gap: 0.5rem; font-size: 0.9rem;">
+            <li><span style="color: #ec4899;">♡</span> Finger Heart</li>
+            <li><span style="color: #db2777;">🫶</span> 2-Handed Heart</li>
+            <li><span style="color: #eab308;">🤙</span> Shaka</li>
+            <li><span style="color: #10b981;">👌</span> OK Sign</li>
+            <li><span style="color: #a855f7;">🤞</span> Crossed Fingers</li>
+            <li><span style="color: #ef4444;">👎</span> The "L"</li>
+            <li><span style="color: #f97316;">🔫</span> Pew Pew (Gun)</li>
+            <li><span style="color: #b91c1c;">🖕</span> Middle Finger</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+  
+  <script type="module" src="script.js"></script>
+</body>
+</html>
